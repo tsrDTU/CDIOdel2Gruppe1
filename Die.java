@@ -1,17 +1,27 @@
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Die {
-    int faceValue = 0;
-    int id = 0;
+    private int faceValue = 0;
 
-    public Die(int id) {
+
+    public Die() {
         faceValue = ThreadLocalRandom.current().nextInt(1, 6 + 1);
-        id = this.id;
+
     }
 
-    public Die(int id, int lowerBound, int upperBound) {
+    public Die( int lowerBound, int upperBound) {
         faceValue = ThreadLocalRandom.current().nextInt(lowerBound, upperBound + 1);
-        id = this.id;
+
     }
+
+    public int getFaceValue(){
+        return faceValue;
+    }
+
+    public int getSum(Die d1, Die d2){
+
+      return  d1.getFaceValue()+d2.getFaceValue();
+    }
+
 
 }
