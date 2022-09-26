@@ -5,6 +5,7 @@ import gui_fields.GUI_Street;
 import gui_main.GUI;
 
 import java.awt.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,9 +27,33 @@ public class Main {
             //selects who starts the game by selection in gui
             boolean selection = gui.getUserLeftButtonPressed("Hvem starter spillet?", player1.getName(), player2.getName());
 
+            //create a selected player that will point at active player
+        GUI_Player selectedPlayer = null;
+        while (player1.getBalance() < 40 && player2.getBalance() < 40) {
 
 
-}
+            if (selection) selectedPlayer = player1;
+            else selectedPlayer = player2;
+
+            Die d1 = new Die();
+            Die d2 = new Die();
+
+            String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
+
+            //uses balance value in GUI, since it displays on GUI at all times, and works like a score.
+            selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1,d2));
+            //show dice on screen
+            gui.setDice(d1.getFaceValue(), d2.getFaceValue());
+            //switch selected player
+            selection = !selection;
+        }
+//when loop ends, show message
+        gui.showMessage(selectedPlayer.getName() + " Har vundet med en score på: " + selectedPlayer.getBalance());
+
+
+    }
+
+
 
     private static int getSum(Die d1,Die d2){
         return d1.getFaceValue()+d2.getFaceValue();
