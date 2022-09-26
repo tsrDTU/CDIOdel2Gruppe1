@@ -29,3 +29,11 @@ public class Main {
 
 
 }
+
+    private static int getSum(Die d1,Die d2){
+        return d1.getFaceValue()+d2.getFaceValue();
+    }
+    private static boolean getEquals(Die d1,Die d2){
+        return (d1.getFaceValue()==d2.getFaceValue());
+    }
+}
