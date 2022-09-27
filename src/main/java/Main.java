@@ -9,6 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
     public static void main(String[] args) {
+        //feature 1
 
         //creates board with black border intead of squares
             GUI_Field[] fields = new GUI_Field[40];
