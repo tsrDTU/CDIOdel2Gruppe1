@@ -8,6 +8,7 @@ import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
+     private static int  die1PrevValue = 0, die2PrevValue = 0, die1PrevPrevValue = 0, die2PrevPrevValue = 0;
     public static void main(String[] args) {
 
         //creates board with black border intead of squares
@@ -35,8 +36,14 @@ public class Main {
             if (selection) selectedPlayer = player1;
             else selectedPlayer = player2;
 
-            Die d1 = new Die();
-            Die d2 = new Die();
+
+          //  Die d1 = new Die(); // Normalt slag
+          //  Die d2 = new Die(); // Normalt slag
+
+             Die d1 = new Die(6,6); // Test. der slås kun 6ere. Kommenter ud efter test
+             Die d2 = new Die(6,6); // Test. der slås kun 6ere. Kommenter ud efter test
+
+
 
             String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
 
@@ -56,7 +63,24 @@ public class Main {
 
 
     private static int getSum(Die d1,Die d2){
-        return d1.getFaceValue()+d2.getFaceValue();
+        int die1ActValue = 0, die2ActValue = 0, actSum = 0;
+
+        die1ActValue = d1.getFaceValue();
+        die2ActValue = d2.getFaceValue();
+
+// die1PrevValue og die2PrevValue er den anden spillers foregående slag
+// die1PrevPrevValue og die2PrevPrevValue er denne spillers foregående slag
+
+        if (die1ActValue == 6 && die2ActValue  == 6 &&  die1PrevPrevValue == 6 &&  die2PrevPrevValue == 6)
+            actSum = 40; //Spillet er slut når en spiller har nået 40 point
+        else actSum = d1.getFaceValue()+d2.getFaceValue();
+
+        die1PrevPrevValue = die1PrevValue;
+        die2PrevPrevValue = die2PrevValue;
+
+        die1PrevValue = die1ActValue;
+        die2PrevValue = die2ActValue;
+        return actSum;
     }
     private static boolean getEquals(Die d1,Die d2){
         return (d1.getFaceValue()==d2.getFaceValue());
