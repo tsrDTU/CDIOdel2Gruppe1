@@ -40,7 +40,10 @@ public class Main {
 
             String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
 
+
             //uses balance value in GUI, since it displays on GUI at all times, and works like a score.
+
+            //checks if score is equal to 2, ie if the player rolls 2 ones
             selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1,d2));
             //show dice on screen
             gui.setDice(d1.getFaceValue(), d2.getFaceValue());
