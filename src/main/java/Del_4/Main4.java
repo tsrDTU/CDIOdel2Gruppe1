@@ -23,7 +23,7 @@ public class Main4 {
         boolean selection = gui.getUserLeftButtonPressed("Hvem starter spillet?", player1.getName(), player2.getName());
         //create a selected player that will point at active player
         GUI_Player selectedPlayer = null;
-        while (player1.getBalance() < 40 && player1.getBalance() >= 0 && player2.getBalance() < 40 && player2.getBalance() >= 0) {
+        while (player1.getBalance() < 40 && player2.getBalance() < 40) {
             if (selection) selectedPlayer = player1;
             else selectedPlayer = player2;
             Die4 d1 = new Die4();
@@ -47,12 +47,14 @@ public class Main4 {
             gui.setDice(d1.getFaceValue(), d2.getFaceValue());
 
             // win with two equal dice
-            if (d1.getFaceValue() == d2.getFaceValue()) {
-                LastDie = d1.getFaceValue();
-                break;
+            if (selectedPlayer.getBalance() >= 40);
+            {
+                if (d1.getFaceValue() == d2.getFaceValue()) {
+                    LastDie = d1.getFaceValue();
+                    break;
+                }
+                //win with two equal dice
             }
-            //win with two equal dice
-
             selection = !selection;
         }
         //when loop ends, show message
