@@ -14,11 +14,5 @@ public class Die4 {
     public int getFaceValue(){
         return faceValue;
     }
-
-
-
-
-
-
 }
 
