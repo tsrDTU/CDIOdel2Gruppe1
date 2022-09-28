@@ -23,33 +23,41 @@ public class Main4 {
         boolean selection = gui.getUserLeftButtonPressed("Hvem starter spillet?", player1.getName(), player2.getName());
         //create a selected player that will point at active player
         GUI_Player selectedPlayer = null;
-        while (player1.getBalance() < 40 && player1.getBalance() >= 0 && player2.getBalance() < 40 &&player2.getBalance() >= 0) {
+        while (player1.getBalance() < 40 && player1.getBalance() >= 0 && player2.getBalance() < 40 && player2.getBalance() >= 0) {
             if (selection) selectedPlayer = player1;
             else selectedPlayer = player2;
             Die4 d1 = new Die4();
             Die4 d2 = new Die4();
             String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
             //uses balance value in GUI, since it displays on GUI at all times, and works like a score.
-            selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1,d2));
+            selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1, d2));
             //show dice on screen
             gui.setDice(d1.getFaceValue(), d2.getFaceValue());
             //switch selected player
             selection = !selection;
         }
-        while (player1.getBalance() >= 40 || player2.getBalance() >= 40)
-        if (selection) selectedPlayer = player1;
-        else selectedPlayer = player2;
-        Die4 d1 = new Die4();
-        Die4 d2 = new Die4();
-        String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
-        selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1,d2));
-        gui.setDice(d1.getFaceValue(), d2.getFaceValue());
-        if (d1==d2)
-            selectedPlayer.setBalance(selectedPlayer.getBalance() * 0-1);
-        selection = !selection;
+        int LastDie = 0;  // for the final display of the die
+        while (player1.getBalance() >= 40 || player2.getBalance() >= 40) {
+            if (selection) selectedPlayer = player1;
+            else selectedPlayer = player2;
+            Die4 d1 = new Die4();
+            Die4 d2 = new Die4();
+            String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
+            selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1, d2));
+            gui.setDice(d1.getFaceValue(), d2.getFaceValue());
 
-            //when loop ends, show message
-        gui.showMessage(selectedPlayer.getName() + " Har vundet med en score på: " + selectedPlayer.getBalance());
+            // win with two equal dice
+            if (d1.getFaceValue() == d2.getFaceValue()) {
+                LastDie = d1.getFaceValue();
+                break;
+            }
+            //win with two equal dice
+
+            selection = !selection;
+        }
+        //when loop ends, show message
+        gui.showMessage(selectedPlayer.getName() + " Har vundet med en score på: " + selectedPlayer.getBalance()
+                + " og med sidste terninger på: " + LastDie);
 
 
     }
