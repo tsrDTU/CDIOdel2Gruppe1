@@ -5,14 +5,20 @@ public class Die {
 
 
     public Die() {
-        faceValue = ThreadLocalRandom.current().nextInt(1, 6 + 1);
+        faceValue = (int)(Math.random() * 6) + 1;
 
     }
 
-    public Die( int lowerBound, int upperBound) {
-        faceValue = ThreadLocalRandom.current().nextInt(lowerBound, upperBound + 1);
+    public Die(int upperBound) {
+        faceValue = (int)(Math.random() * upperBound) + 1;
 
     }
+    public Die(int lowerBound, int upperBound) {
+        int temp =(int)(Math.random() * upperBound-lowerBound) + 1;
+        faceValue = temp+lowerBound;
+
+    }
+
 
     public int getFaceValue(){
         return faceValue;
