@@ -45,8 +45,11 @@ public class Main {
             //show dice on screen
             gui.setDice(d1.getFaceValue(), d2.getFaceValue());
             //switch selected player
-           if (!getEquals(d1,d2))selection = !selection;
-            gui.showMessage(selectedPlayer.getName() + " Du har fået en ekstra tur, fordi du har slået to ens: " + selectedPlayer.getBalance());
+           if (!getEquals(d1,d2)) {
+               selection = !selection;
+           }
+           else{
+            gui.showMessage(selectedPlayer.getName() + " Du har fået en ekstra tur, fordi du har slået to ens: ") ; }
         }
 //when loop ends, show message
         gui.showMessage(selectedPlayer.getName() + " Har vundet med en score på: " + selectedPlayer.getBalance());
