@@ -48,7 +48,9 @@ public class Main {
             if(getSum(d1, d2)==2){
                 selectedPlayer.setBalance(0);
             }
-            selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1,d2));
+            else {
+                selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1, d2));
+            }
             //show dice on screen
             gui.setDice(d1.getFaceValue(), d2.getFaceValue());
             //switch selected player
