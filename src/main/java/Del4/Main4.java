@@ -26,8 +26,8 @@ public class Main4 {
         while (player1.getBalance() < 40 && player2.getBalance() < 40) {
             if (selection) selectedPlayer = player1;
             else selectedPlayer = player2;
-            Del_4.Die4 d1 = new Del_4.Die4();
-            Del_4.Die4 d2 = new Del_4.Die4();
+            Del4.Die4 d1 = new Del4.Die4();
+            Del4.Die4 d2 = new Del4.Die4();
             String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
             //uses balance value in GUI, since it displays on GUI at all times, and works like a score.
             selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1, d2));
@@ -40,8 +40,8 @@ public class Main4 {
         while (player1.getBalance() >= 40 || player2.getBalance() >= 40) {
             if (selection) selectedPlayer = player1;
             else selectedPlayer = player2;
-            Del_4.Die4 d1 = new Del_4.Die4();
-            Del_4.Die4 d2 = new Del_4.Die4();
+            Del4.Die4 d1 = new Del4.Die4();
+            Del4.Die4 d2 = new Del4.Die4();
             String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
             selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1, d2));
             gui.setDice(d1.getFaceValue(), d2.getFaceValue());
@@ -66,10 +66,10 @@ public class Main4 {
 
 
 
-    private static int getSum(Del_4.Die4 d1, Del_4.Die4 d2){
+    private static int getSum(Del4.Die4 d1, Del4.Die4 d2){
         return d1.getFaceValue()+d2.getFaceValue();
     }
-    private static boolean getEquals(Del_4.Die4 d1, Del_4.Die4 d2){
+    private static boolean getEquals(Del4.Die4 d1, Del4.Die4 d2){
         return (d1.getFaceValue()==d2.getFaceValue());
     }
 }
