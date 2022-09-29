@@ -45,6 +45,9 @@ public class Main {
             //uses balance value in GUI, since it displays on GUI at all times, and works like a score.
 
             //checks if score is equal to 2, ie if the player rolls 2 ones
+            if(getSum(d1, d2)==2){
+                selectedPlayer.setBalance(0);
+            }
             selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1,d2));
             //show dice on screen
             gui.setDice(d1.getFaceValue(), d2.getFaceValue());
@@ -66,3 +69,4 @@ public class Main {
         return (d1.getFaceValue()==d2.getFaceValue());
     }
 }
+
