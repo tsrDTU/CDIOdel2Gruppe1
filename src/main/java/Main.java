@@ -47,8 +47,30 @@ public class Main {
             //switch selected player
             selection = !selection;
         }
-//when loop ends, show message
-        gui.showMessage(selectedPlayer.getName() + " Har vundet med en score på: " + selectedPlayer.getBalance());
+        int LastDie = 0;  // for the final display of the die
+        while (player1.getBalance() >= 40 || player2.getBalance() >= 40) {
+            if (selection) selectedPlayer = player1;
+            else selectedPlayer = player2;
+            Die d1 = new Die();
+            Die d2 = new Die();
+            String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
+            selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1,d2));
+            gui.setDice(d1.getFaceValue(), d2.getFaceValue());
+
+            // win with two equal dice
+            if (selectedPlayer.getBalance() >= 40);
+            {
+                if (d1.getFaceValue() == d2.getFaceValue()) {
+                    LastDie = d1.getFaceValue();
+                    break;
+                }
+                //win with two equal dice
+            }
+            selection = !selection;
+        }
+        //when loop ends, show message
+        gui.showMessage(selectedPlayer.getName() + " Har vundet med en score på: " + selectedPlayer.getBalance()
+                + " og med sidste terninger på: " + LastDie);
 
 
     }
