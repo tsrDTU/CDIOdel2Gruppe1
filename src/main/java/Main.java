@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
     public static void main(String[] args) {
-boolean lastMax =false;
+
         //creates board with black border intead of squares
             GUI_Field[] fields = new GUI_Field[40];
             for (int i = 0; i < fields.length; i++) {
@@ -29,20 +29,29 @@ boolean lastMax =false;
 
             //create a selected player that will point at active player
         GUI_Player selectedPlayer = null;
-        while (player1.getBalance() < 40 && player2.getBalance() < 40) {
+        boolean gameEnd = false, lastMax=false;
+        while (player1.getBalance() < 40 && player2.getBalance() < 40&& !gameEnd) {
 
 
             if (selection) selectedPlayer = player1;
             else selectedPlayer = player2;
 
-            Die d1 = new Die();
-            Die d2 = new Die();
+            Die d1 = new Die(6,6);
+            Die d2 = new Die(6,6);
 
             String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
 
             //uses balance value in GUI, since it displays on GUI at all times, and works like a score.
 
             //checks if score is equal to 2, ie if the player rolls 2 ones
+            if (getSum(d1,d2)==12 && lastMax){
+                gameEnd = true;
+                continue;
+            }
+
+            lastMax = getSum(d1, d2) == 12;
+
+
             if(getSum(d1, d2)==2){
                 selectedPlayer.setBalance(0);
             }
@@ -54,6 +63,7 @@ boolean lastMax =false;
             //switch selected player
            if (!getEquals(d1,d2)) {
                selection = !selection;
+               lastMax = false;
            }
            else{
             gui.showMessage(selectedPlayer.getName() + " Du har fået en ekstra tur, fordi du har slået to ens: ") ; }
