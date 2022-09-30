@@ -8,8 +8,9 @@ import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
+     private static int  die1PrevValue = 0, die2PrevValue = 0, die1PrevPrevValue = 0, die2PrevPrevValue = 0;
     public static void main(String[] args) {
-
+boolean lastMax =false;
         //creates board with black border intead of squares
             GUI_Field[] fields = new GUI_Field[40];
             for (int i = 0; i < fields.length; i++) {
@@ -35,8 +36,13 @@ public class Main {
             if (selection) selectedPlayer = player1;
             else selectedPlayer = player2;
 
-            Die d1 = new Die();
-            Die d2 = new Die();
+
+            Die d1 = new Die(); // Normalt slag
+            Die d2 = new Die(); // Normalt slag
+
+
+
+
 
             String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
 
@@ -56,7 +62,7 @@ public class Main {
 
 
     private static int getSum(Die d1,Die d2){
-        return d1.getFaceValue()+d2.getFaceValue();
+        return (d1.getFaceValue()+d2.getFaceValue());
     }
     private static boolean getEquals(Die d1,Die d2){
         return (d1.getFaceValue()==d2.getFaceValue());
