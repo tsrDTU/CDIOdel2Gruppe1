@@ -8,7 +8,6 @@ import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
-     private static int  die1PrevValue = 0, die2PrevValue = 0, die1PrevPrevValue = 0, die2PrevPrevValue = 0;
     public static void main(String[] args) {
 boolean lastMax =false;
         //creates board with black border intead of squares
@@ -36,22 +35,28 @@ boolean lastMax =false;
             if (selection) selectedPlayer = player1;
             else selectedPlayer = player2;
 
-
-            Die d1 = new Die(); // Normalt slag
-            Die d2 = new Die(); // Normalt slag
-
-
-
-
+            Die d1 = new Die();
+            Die d2 = new Die();
 
             String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
 
             //uses balance value in GUI, since it displays on GUI at all times, and works like a score.
-            selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1,d2));
+
+            //checks if score is equal to 2, ie if the player rolls 2 ones
+            if(getSum(d1, d2)==2){
+                selectedPlayer.setBalance(0);
+            }
+            else {
+                selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1, d2));
+            }
             //show dice on screen
             gui.setDice(d1.getFaceValue(), d2.getFaceValue());
             //switch selected player
-            selection = !selection;
+           if (!getEquals(d1,d2)) {
+               selection = !selection;
+           }
+           else{
+            gui.showMessage(selectedPlayer.getName() + " Du har fået en ekstra tur, fordi du har slået to ens: ") ; }
         }
 //when loop ends, show message
         gui.showMessage(selectedPlayer.getName() + " Har vundet med en score på: " + selectedPlayer.getBalance());
