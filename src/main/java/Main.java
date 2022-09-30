@@ -9,6 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
     public static void main(String[] args) {
+        //feature 1
 
         //creates board with black border intead of squares
             GUI_Field[] fields = new GUI_Field[40];
@@ -40,8 +41,16 @@ public class Main {
 
             String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
 
+
             //uses balance value in GUI, since it displays on GUI at all times, and works like a score.
-            selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1,d2));
+
+            //checks if score is equal to 2, ie if the player rolls 2 ones
+            if(getSum(d1, d2)==2){
+                selectedPlayer.setBalance(0);
+            }
+            else {
+                selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1, d2));
+            }
             //show dice on screen
             gui.setDice(d1.getFaceValue(), d2.getFaceValue());
             //switch selected player
@@ -62,3 +71,4 @@ public class Main {
         return (d1.getFaceValue()==d2.getFaceValue());
     }
 }
+
