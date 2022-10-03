@@ -30,17 +30,22 @@ public class Main {
             //create a selected player that will point at active player
         GUI_Player selectedPlayer = null;
         boolean gameEnd = false, lastMax=false;
+
         Die d1 = new Die();
         Die d2 = new Die();
 
-        while (player1.getBalance() < 40 && player2.getBalance() < 40&& !gameEnd || !getEquals(d1,d2)) {
+        selectedPlayer = player1;  //???
+
+        while (player1.getBalance() < 40 && player2.getBalance() < 40 && !gameEnd /*|| !getEquals(d1,d2)*/) {
 
 
             if (selection) selectedPlayer = player1;
             else selectedPlayer = player2;
 
-            d1 = new Die();
-            d2 = new Die();
+            d1.die_normal();
+            d2.die_normal();
+//            d1.Die_test(1,6);
+//            d2.Die_test(1,6);
 
             String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
 
@@ -49,7 +54,7 @@ public class Main {
             //checks if score is equal to 2, ie if the player rolls 2 ones
             if (getSum(d1,d2)==12 && lastMax){
                 gameEnd = true;
-                continue;
+ //               continue;
             }
 
             lastMax = getSum(d1, d2) == 12;
