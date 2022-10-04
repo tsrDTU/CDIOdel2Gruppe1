@@ -19,6 +19,7 @@ boolean lastMax =false;
             }
             GUI gui = new GUI(fields, Color.WHITE);
 
+
             //Initializes players with name inputs
             GUI_Player player1 = new GUI_Player(gui.getUserString("Hvem er Spiller 1?"), 0);
             GUI_Player player2 = new GUI_Player(gui.getUserString("Hvem er Spiller 2?"), 0);
