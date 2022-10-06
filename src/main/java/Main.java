@@ -1,7 +1,5 @@
-import gui_codebehind.GUI_Center;
 import gui_fields.*;
 import gui_main.GUI;
-import gui_fields.GUI_Car;
 import gui_fields.GUI_Street;
 import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
