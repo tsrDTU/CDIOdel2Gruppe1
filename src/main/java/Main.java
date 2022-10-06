@@ -99,27 +99,27 @@ public class Main {
 
             // Moving cars on the fields
             if(player1.getBalance()<3000 && player2.getBalance()<3000) {
-
+        // for statement som checker hvilke biler der er på felterne, og som sætter biler ind i nye felter
            for (int i = 0;i<=11;i++) {
                 if (fields[i].hasCar(player1) && fields[i].hasCar((player2))) {
-                    fields[i].removeAllCars();
+                    fields[i].removeAllCars();                                      // slætter begge biler i et felt med 2 biler
                     if (selectedPlayer == player1){
-                        fields[i].setCar(player2, true);
+                        fields[i].setCar(player2, true);                    //  sætter manglende bil ind i sin originale position
                         i=11;
-
                     }
-                    else fields[i].setCar(player1, true);
-                    fields[getSum(d1,d2)-2].setCar(selectedPlayer, true);
+                    else fields[i].setCar(player1, true);                   // sætter manglende bil ind i sin originale position
+                    fields[getSum(d1,d2)-2].setCar(selectedPlayer, true); // sætter bil ind efter det nye terningekast
                     i=11;
                 }
                else if (fields[i].hasCar(selectedPlayer)) {
-                    fields[i].removeAllCars();
-                    fields[getSum(d1,d2)-2].setCar(selectedPlayer, true);
+                    fields[i].removeAllCars();                                  // slætter bil fra sin gamle position
+                    fields[getSum(d1,d2)-2].setCar(selectedPlayer, true); // sætter bil ind efter det nye terningekast
                     i=11;
                }
 
            }
-                selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1, d2));}
+                selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1, d2)); // øger banken med de nye terningekast
+            }
 
 
 
