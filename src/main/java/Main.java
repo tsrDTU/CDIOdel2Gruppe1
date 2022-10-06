@@ -42,8 +42,8 @@ public class Main {
 
 
             //Initializes players with name inputs
-            GUI_Player player1 = new GUI_Player(gui.getUserString("Hvem er Spiller 1?"), 0);
-            GUI_Player player2 = new GUI_Player(gui.getUserString("Hvem er Spiller 2?"), 0);
+            GUI_Player player1 = new GUI_Player(gui.getUserString("Hvem er Spiller 1?"), 1000);
+            GUI_Player player2 = new GUI_Player(gui.getUserString("Hvem er Spiller 2?"), 1000);
             gui.addPlayer(player1);
             gui.addPlayer(player2);
 
@@ -65,7 +65,7 @@ public class Main {
 
 
 
-        while (player1.getBalance() < 40000 && player2.getBalance() < 40000 && !gameEnd ) {
+        while (player1.getBalance() < 3000 && player2.getBalance() < 3000 && !gameEnd ) {
 
 
             if (selection) selectedPlayer = player1;
@@ -142,7 +142,7 @@ public class Main {
         }
 
         //when loop ends, show message
-        gui.showMessage(selectedPlayer.getName() + " Har vundet med en score på: " + selectedPlayer.getBalance()+2);
+        gui.showMessage(selectedPlayer.getName() + " Har vundet med en score på: " + selectedPlayer.getBalance());
 
 //
     }
