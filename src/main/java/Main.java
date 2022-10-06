@@ -1,9 +1,6 @@
 import gui_fields.*;
 import gui_main.GUI;
 import gui_fields.GUI_Car;
-import gui_resources.*;
-import gui_fields.GUI_Shipping;
-import gui_fields.GUI_Tax;
 import gui_fields.GUI_Street;
 import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -14,11 +11,6 @@ public class Main {
 
 
         GUI_Street[] fields = new GUI_Street[11];
-            GUI_Car[] cars = new GUI_Car[2];
-
-        cars[0] = new GUI_Car();
-        cars[1] = new GUI_Car();
-
 
         fields[0] = new GUI_Street("2 Tower ", "+250", "","250", Color.GREEN, Color.BLACK);
         fields[1] = new GUI_Street("3 Crater ", "-100", "", "-100", Color.RED, Color.BLACK);
@@ -105,7 +97,8 @@ public class Main {
             String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
             //uses balance value in GUI, since it displays on GUI at all times, and works like a score.
 
-            // Moving cars on the fields
+            // Moving cars on the fields - and taking consequence of field
+
             if(player1.getBalance()<3000 && player2.getBalance()<3000) {
         // for statement som checker hvilke biler der er på felterne, og som sætter biler ind i nye felter
            for (int i = 0;i<=11;i++) {
@@ -137,12 +130,15 @@ public class Main {
             gui.setDice(d1.getFaceValue(), d2.getFaceValue());
 
            //switch selected player
-           if (!getEquals(d1,d2)) {
-               selection = !selection;
-               lastMax = false;
-           }
-           else if (!(selectedPlayer.getBalance()>40)){
-            gui.showMessage(selectedPlayer.getName() + " Du har fået en ekstra tur, fordi du har slået to ens: ") ; }
+           if (!(Integer.parseInt(fields[getSum(d1,d2)-2].getRent())==-80))
+            selection = !selection;
+        //        lastMax = false;
+        //    if (!getEquals(d1,d2)) {
+        //       selection = !selection;
+        //       lastMax = false;
+
+           else if (!(selectedPlayer.getBalance()>3000)){
+            gui.showMessage(selectedPlayer.getName() + " Du har fået en ekstra tur, fordi du ramte felt 8: ") ; }
         }
 
         //when loop ends, show message
