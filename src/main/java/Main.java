@@ -2,30 +2,38 @@ import gui_fields.*;
 import gui_main.GUI;
 import gui_fields.GUI_Car;
 import gui_resources.*;
+import gui_fields.GUI_Shipping;
+import gui_fields.GUI_Tax;
+import gui_fields.GUI_Street;
 import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
         public static void main(String[] args) {
 
-        GUI_Field[] fields = new GUI_Field[11];
+
+
+        GUI_Street[] fields = new GUI_Street[11];
             GUI_Car[] cars = new GUI_Car[2];
 
         cars[0] = new GUI_Car();
         cars[1] = new GUI_Car();
 
 
-        fields[0] = new GUI_Street("2 Tower ", "+250", "", " ", Color.GREEN, Color.BLACK);
-        fields[1] = new GUI_Street("3 Crater ", "-100", "", " ", Color.RED, Color.BLACK);
-        fields[2] = new GUI_Street("4 Palace gates", "+100", "c", " ", Color.GREEN, Color.BLACK);
-        fields[3] = new GUI_Street("5 Cold Desert", "-20", "E", " ", Color.RED, Color.BLACK);
-        fields[4] = new GUI_Street("6 Walled city", "+180", "c", " ", Color.GREEN, Color.BLACK);
-        fields[5] = new GUI_Street("7 Monastery ", "0", "E", " ", Color.YELLOW, Color.BLACK);
-        fields[6] = new GUI_Street("8 Black cave ", "-70", "c", " ", Color.RED, Color.BLACK);
-        fields[7] = new GUI_Street("9 Huts in the mountain", "+60", "E", " ", Color.GREEN, Color.BLACK);
-        fields[8] = new GUI_Street("10 The Werewall", "-80 Ekstra tur", "c", " ", Color.GRAY, Color.BLACK);
-        fields[9] = new GUI_Street("11 The pit ", "-50", "", " ", Color.RED, Color.BLACK);
-        fields[10] = new GUI_Street("12 Goldmine ", "+650", "", " ", Color.GREEN, Color.BLACK);
+        fields[0] = new GUI_Street("2 Tower ", "+250", "","250", Color.GREEN, Color.BLACK);
+        fields[1] = new GUI_Street("3 Crater ", "-100", "", "-100", Color.RED, Color.BLACK);
+        fields[2] = new GUI_Street("4 Palace gates", "+100", "c", "+100", Color.GREEN, Color.BLACK);
+        fields[3] = new GUI_Street("5 Cold Desert", "-20", "E", "-20", Color.RED, Color.BLACK);
+        fields[4] = new GUI_Street("6 Walled city", "+180", "c", "+180", Color.GREEN, Color.BLACK);
+        fields[5] = new GUI_Street("7 Monastery ", "0", "E", "0", Color.YELLOW, Color.BLACK);
+        fields[6] = new GUI_Street("8 Black cave ", "-70", "c", "-70", Color.RED, Color.BLACK);
+        fields[7] = new GUI_Street("9 Huts in the mountain", "+60", "E", "+60", Color.GREEN, Color.BLACK);
+        fields[8] = new GUI_Street("10 The Werewall", "-80 Ekstra tur", "c", "-80", Color.GRAY, Color.BLACK);
+        fields[9] = new GUI_Street("11 The pit ", "-50", "", "-50", Color.RED, Color.BLACK);
+        fields[10] = new GUI_Street("12 Goldmine ", "+650", "", "+650", Color.GREEN, Color.BLACK);
+
+
+
 
 
 
@@ -118,7 +126,9 @@ public class Main {
                }
 
            }
-                selectedPlayer.setBalance(selectedPlayer.getBalance() + getSum(d1, d2)); // øger banken med de nye terningekast
+
+           int konsekvens = Integer.parseInt(fields[getSum(d1,d2)-2].getRent());  // pengestrøms definition fra felter
+                selectedPlayer.setBalance(selectedPlayer.getBalance() + konsekvens); // øger banken med de nye terningekast
             }
 
 
