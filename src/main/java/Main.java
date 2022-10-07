@@ -96,7 +96,7 @@ public class Main {
 
                 //Extra tur
             else if (!(selectedPlayer.getBalance()>3000)){
-                gui.showMessage(selectedPlayer.getName() + " Du har fået en ekstra tur, fordi du ramte felt 8: ") ; }
+                gui.showMessage(selectedPlayer.getName() + " Du har fået en ekstra tur, fordi du ramte felt 10: ") ; }
         }
 
         //when loop ends, show message
