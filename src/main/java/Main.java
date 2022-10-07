@@ -1,7 +1,4 @@
-import gui_fields.GUI_Board;
-import gui_fields.GUI_Field;
-import gui_fields.GUI_Player;
-import gui_fields.GUI_Street;
+import gui_fields.*;
 import gui_main.GUI;
 
 import java.awt.*;
@@ -26,14 +23,8 @@ public class Main {
 
 
         GUI gui = new GUI(fields, Color.WHITE);
-/*
-        //creates board with black border intead of squares
-            GUI_Field[] fields = new GUI_Field[40];
-            for (int i = 0; i < fields.length; i++) {
-                fields[i] = new GUI_Street(" ", " ", " ", " ", Color.BLACK, Color.BLACK);
 
-            }
-            GUI gui = new GUI(fields, Color.WHITE);
+
 
 
             //Initializes players with name inputs
@@ -52,8 +43,18 @@ public class Main {
         Die d1 = new Die();
         Die d2 = new Die();
 
-        selectedPlayer = player1;  //???
+        selectedPlayer = player1;
 
+        GUI_Car p1_car, p2_car;
+        p1_car = new GUI_Car ();
+        p2_car = new GUI_Car ();
+        p1_car.setPrimaryColor(Color.BLACK);
+        p2_car.setPrimaryColor(Color.CYAN);
+     //   GUI_Field.
+
+
+ //       GUI gui = new GUI();
+/*
         while (player1.getBalance() < 40 && player2.getBalance() < 40 && !gameEnd ) {
 
 
