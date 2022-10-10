@@ -92,11 +92,12 @@ public class Main {
 
         //Randomiser for dice positioning on the board
         int random_numx = ThreadLocalRandom.current().nextInt(4, 6);
-        int random_numy = ThreadLocalRandom.current().nextInt(4, 6);
-        int random_num1 = ThreadLocalRandom.current().nextInt(1, 2);
-        int random_num2 = ThreadLocalRandom.current().nextInt(0, 2);
+        int random_numy = ThreadLocalRandom.current().nextInt(5, 7);
+        int random_numz = ThreadLocalRandom.current().nextInt(5, 7);
+
         //Show dice on screen
-        gui.setDice(d1.getFaceValue(),random_numx,random_numy,d2.getFaceValue(),random_numx+random_num1,random_numy+random_num2);
+        gui.setDice(d1.getFaceValue(),random_numx,random_numy,d2.getFaceValue(),random_numx+1,random_numz);
+
 
         //Switch selected player
         if (!(Integer.parseInt(fields[getSum(d1,d2)-2].getRent())==-80))
