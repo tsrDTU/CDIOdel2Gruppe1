@@ -1,13 +1,10 @@
 import gui_fields.*;
 import gui_main.GUI;
 import gui_fields.GUI_Street;
-import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 import gui_fields.GUI_Car;
-import java.awt.GridBagLayout;
 import gui_codebehind.GUI_Center;
 import java.awt.Color;
-
 public class Main {
         public static void main(String[] args) {
         //Fields get defined:
@@ -31,8 +28,8 @@ public class Main {
             GUI_Car p2car = new GUI_Car(Color.RED,Color.WHITE, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL);
 
             //Initializes players with name inputs
-            GUI_Player player1 = new GUI_Player(gui.getUserString("Hvem er Spiller 1?"), 1000, p1car);
-            GUI_Player player2 = new GUI_Player(gui.getUserString("Hvem er Spiller 2?"), 1000, p2car);
+            GUI_Player player1 = new GUI_Player(gui.getUserString("Hvem er Spiller 1?"), 1000, p2car);
+            GUI_Player player2 = new GUI_Player(gui.getUserString("Hvem er Spiller 2?"), 1000, p1car);
             gui.addPlayer(player1);
             gui.addPlayer(player2);
 
@@ -55,11 +52,11 @@ public class Main {
            if (selection) selectedPlayer = player1;
            else selectedPlayer = player2;
 
-           d1 = new Die();
-           d2 = new Die();
+            String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
+            //Prints a button and some text for throwing dice
 
-           String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
-           //Uses balance value in GUI, since it displays on GUI at all times, and works like a score.
+            d1 = new Die();
+           d2 = new Die();
 
            //Moving cars on the fields - and taking consequence of field
            if(player1.getBalance()<3000 && player2.getBalance()<3000) {
