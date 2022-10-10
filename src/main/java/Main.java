@@ -3,6 +3,7 @@ import gui_main.GUI;
 import gui_fields.GUI_Street;
 import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
+import gui_fields.GUI_Car;
 
 public class Main {
         public static void main(String[] args) {
@@ -22,9 +23,13 @@ public class Main {
 
             GUI gui = new GUI(fields, Color.WHITE);
 
+            //Makes Cars in different colors depending on player
+            GUI_Car p1car = new GUI_Car(Color.BLUE,Color.WHITE,GUI_Car.Type.CAR, GUI_Car.Pattern.FILL);
+            GUI_Car p2car = new GUI_Car(Color.RED,Color.WHITE, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL);
+
             //Initializes players with name inputs
-            GUI_Player player1 = new GUI_Player(gui.getUserString("Hvem er Spiller 1?"), 1000);
-            GUI_Player player2 = new GUI_Player(gui.getUserString("Hvem er Spiller 2?"), 1000);
+            GUI_Player player1 = new GUI_Player(gui.getUserString("Hvem er Spiller 1?"), 1000, p1car);
+            GUI_Player player2 = new GUI_Player(gui.getUserString("Hvem er Spiller 2?"), 1000, p2car);
             gui.addPlayer(player1);
             gui.addPlayer(player2);
 
@@ -77,7 +82,8 @@ public class Main {
                }
 
            }
-               gui.showMessage("du har landet på: ");
+           //Shows description of the space you land on
+           gui.displayChanceCard(fields[d1.getFaceValue()+d2.getFaceValue()-2].getDescription());
 
            //Deposit/Withdraw money from fields on the board
            int konsekvens = Integer.parseInt(fields[getSum(d1,d2)-2].getRent());
