@@ -8,17 +8,17 @@ public class Main {
         public static void main(String[] args) {
         //Fields get defined:
         GUI_Street[] fields = new GUI_Street[11];
-        fields[0] = new GUI_Street("2 Tower ", "+250", "","250", Color.GREEN, Color.BLACK);
-        fields[1] = new GUI_Street("3 Crater ", "-100", "", "-100", Color.RED, Color.BLACK);
-        fields[2] = new GUI_Street("4 Palace gates", "+100", "c", "+100", Color.GREEN, Color.BLACK);
-        fields[3] = new GUI_Street("5 Cold Desert", "-20", "E", "-20", Color.RED, Color.BLACK);
-        fields[4] = new GUI_Street("6 Walled city", "+180", "c", "+180", Color.GREEN, Color.BLACK);
-        fields[5] = new GUI_Street("7 Monastery ", "0", "E", "0", Color.YELLOW, Color.BLACK);
-        fields[6] = new GUI_Street("8 Black cave ", "-70", "c", "-70", Color.RED, Color.BLACK);
-        fields[7] = new GUI_Street("9 Huts in the mountain", "+60", "E", "+60", Color.GREEN, Color.BLACK);
-        fields[8] = new GUI_Street("10 The Werewall", "-80 Ekstra tur", "c", "-80", Color.GRAY, Color.BLACK);
-        fields[9] = new GUI_Street("11 The pit ", "-50", "", "-50", Color.RED, Color.BLACK);
-        fields[10] = new GUI_Street("12 Goldmine ", "+650", "", "+650", Color.GREEN, Color.BLACK);
+        fields[0] = new GUI_Street("2 Tower ", "+250", "Du finder et tårn med 250mønter","250", Color.GREEN, Color.BLACK);
+        fields[1] = new GUI_Street("3 Crater ", "-100", "Du ryger ned i et krater og mister 100mønter", "-100", Color.RED, Color.BLACK);
+        fields[2] = new GUI_Street("4 Palace gates", "+100", "Du finder et palads og får 100mønter", "+100", Color.GREEN, Color.BLACK);
+        fields[3] = new GUI_Street("5 Cold Desert", "-20", "Du kommer forbi en kold ørken og taber 20mønter", "-20", Color.RED, Color.BLACK);
+        fields[4] = new GUI_Street("6 Walled city", "+180", "Du finder en godt bevogtet by og får 180mønter", "+180", Color.GREEN, Color.BLACK);
+        fields[5] = new GUI_Street("7 Monastery ", "0", "Du finder et kloster", "0", Color.YELLOW, Color.BLACK);
+        fields[6] = new GUI_Street("8 Black cave ", "-70", "Du falder i en mørk grotte og taber 70mønter", "-70", Color.RED, Color.BLACK);
+        fields[7] = new GUI_Street("9 Huts in the mountain", "+60", "Du finder en hytte i bjergende med 60mønter", "+60", Color.GREEN, Color.BLACK);
+        fields[8] = new GUI_Street("10 The Werewall", "-80 Ekstra tur", "Du finder vareulvevægen og mister 80mønter, men opnår en eksta tur", "-80", Color.GRAY, Color.BLACK);
+        fields[9] = new GUI_Street("11 The pit ", "-50", "du falder i et hul og taber 50mønter", "-50", Color.RED, Color.BLACK);
+        fields[10] = new GUI_Street("12 Goldmine ", "+650", "Du når guldminen og tjener 650", "+650", Color.GREEN, Color.BLACK);
 
             GUI gui = new GUI(fields, Color.WHITE);
 
@@ -77,6 +77,8 @@ public class Main {
                }
 
            }
+               gui.showMessage("du har landet på: ");
+
            //Deposit/Withdraw money from fields on the board
            int konsekvens = Integer.parseInt(fields[getSum(d1,d2)-2].getRent());
            selectedPlayer.setBalance(selectedPlayer.getBalance() + konsekvens);
