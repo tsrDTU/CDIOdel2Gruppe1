@@ -4,6 +4,9 @@ import gui_fields.GUI_Street;
 import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 import gui_fields.GUI_Car;
+import java.awt.GridBagLayout;
+import gui_codebehind.GUI_Center;
+import java.awt.Color;
 
 public class Main {
         public static void main(String[] args) {
@@ -80,10 +83,17 @@ public class Main {
                     fields[getSum(d1,d2)-2].setCar(selectedPlayer, true);
                     i=11;
                }
-
            }
-           //Shows description of the space you land on
-           gui.displayChanceCard(fields[d1.getFaceValue()+d2.getFaceValue()-2].getDescription());
+           //Shows description of the space you land on, and changes color
+           gui.displayChanceCard(fields[getSum(d1,d2)-2].getDescription());
+               if (Integer.parseInt(fields[getSum(d1,d2)-2].getRent())>0)
+                   GUI_Center.getInstance().setBGColor(Color.GREEN);
+               else if (Integer.parseInt(fields[getSum(d1,d2)-2].getRent())==-80)
+                   GUI_Center.getInstance().setBGColor(Color.GRAY);
+               else if (Integer.parseInt(fields[getSum(d1,d2)-2].getRent())<0)
+                   GUI_Center.getInstance().setBGColor(Color.RED);
+               else
+                   GUI_Center.getInstance().setBGColor(Color.YELLOW);
 
            //Deposit/Withdraw money from fields on the board
            int konsekvens = Integer.parseInt(fields[getSum(d1,d2)-2].getRent());
@@ -94,7 +104,6 @@ public class Main {
         int random_numx = ThreadLocalRandom.current().nextInt(4, 6);
         int random_numy = ThreadLocalRandom.current().nextInt(5, 7);
         int random_numz = ThreadLocalRandom.current().nextInt(5, 7);
-
         //Show dice on screen
         gui.setDice(d1.getFaceValue(),random_numx,random_numy,d2.getFaceValue(),random_numx+1,random_numz);
 
