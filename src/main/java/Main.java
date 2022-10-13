@@ -2,10 +2,28 @@ import gui_fields.*;
 import gui_main.GUI;
 import gui_fields.GUI_Street;
 import java.awt.*;
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+
+
+
+
 
 public class Main {
     public static void main(String[] args) {
+        Scanner indtasning = new Scanner(System.in);
+        String string_in;
+        int antal_kant;
+
+        System.out.println("Der er forhåndsvalgt terninger med 6 kanter. Tast eter for at vælge dette. Ellers indtast det ønskede antal kanter i terningen og tast enter");
+        string_in=indtasning.nextLine();
+        System.out.println(string_in);
+        if (string_in.length() > 0) {
+            antal_kant = (int) string_in.charAt(0) - '0';
+        }
+        else antal_kant = 6;
+        System.out.println(antal_kant);
+
         //Fields get defined:
         GUI_Street[] fields = new GUI_Street[11];
         fields[0] = new GUI_Street("2 Tower ", "+250", "","250", Color.GREEN, Color.BLACK);
@@ -42,13 +60,20 @@ public class Main {
         Die d1 = new Die();
         Die d2 = new Die();
 
+        if (antal_kant != 6)
+        {
+            d1.setNumberOfSides(antal_kant);
+            d2.setNumberOfSides(antal_kant);
+        }
+
+
         //Game loop
         while (player1.getBalance() < 3000 && player2.getBalance() < 3000 && !gameEnd ) {
             if (selection) selectedPlayer = player1;
             else selectedPlayer = player2;
 
-            d1 = new Die();
-            d2 = new Die();
+            d1.dice_roll();
+            d2.dice_roll();
 
             String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
             //Uses balance value in GUI, since it displays on GUI at all times, and works like a score.

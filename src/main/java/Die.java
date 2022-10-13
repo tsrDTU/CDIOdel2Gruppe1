@@ -1,11 +1,10 @@
-import java.util.concurrent.ThreadLocalRandom;
-
 public class Die {
-    private int faceValue = 0;
+    private int faceValue = 0, numberOfSides = 6;
+
 
 
     public Die() {
-        faceValue = (int)(Math.random() * 6) + 1;
+        faceValue = (int)(Math.random() * numberOfSides) + 1;
 
     }
 
@@ -20,9 +19,9 @@ public class Die {
  //       faceValue = upperBound;
     }
 
-    public void die_normal ()
+    public void dice_roll ()
     {
-        faceValue = (int)(Math.random() * 6) + 1;
+        faceValue = (int)(Math.random() * numberOfSides) + 1;
     }
 
 
@@ -31,6 +30,10 @@ public class Die {
     }
 
 
+    public void setNumberOfSides(int newNumberOfSides)
+    {
+        numberOfSides=newNumberOfSides;
+    }
 
 
 
