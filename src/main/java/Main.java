@@ -1,9 +1,11 @@
-import gui_fields.*;
-import gui_main.GUI;
+import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
+import gui_main.GUI;
+
 import java.awt.*;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+import java.io.*;
 
 
 
@@ -13,9 +15,34 @@ public class Main {
     public static void main(String[] args) {
         Scanner indtasning = new Scanner(System.in);
         String string_in;
-        int antal_kant;
+        int antal_kant, n;
+        String[] dialog = new String[11];
 
-        System.out.println("Der er forhåndsvalgt terninger med 6 kanter. Tast eter for at vælge dette. Ellers indtast det ønskede antal kanter i terningen og tast enter");
+        try {
+            File file = new File("C:/Users/tsr_0/IdeaProjects/CDIOdel2Gruppe1/src/Sprog/Dansk");    //creates a new file instance
+            FileReader fr = new FileReader(file);   //reads the file
+            BufferedReader br = new BufferedReader(fr);  //creates a buffering character input stream
+            StringBuffer sb = new StringBuffer();    //constructs a string buffer with no characters
+            String line;
+            n=0;
+            while ((line = br.readLine()) != null) {
+                sb.append(line);      //appends line to string buffer
+                sb.append("\n");     //line feed
+                dialog[n]=line;
+                System.out.println(line);
+                n++;
+            }
+
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+
+
+     //   System.out.println("Der er forhåndsvalgt terninger med 6 kanter. Tast eter for at vælge dette. Ellers indtast det ønskede antal kanter i terningen og tast enter");
+
+        System.out.println(dialog[0]);
         string_in=indtasning.nextLine();
         System.out.println(string_in);
         if (string_in.length() > 0) {
