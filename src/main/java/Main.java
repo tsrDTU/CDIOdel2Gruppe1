@@ -3,9 +3,12 @@ import gui_fields.GUI_Street;
 import gui_main.GUI;
 
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
-import java.io.*;
 
 
 
@@ -14,42 +17,12 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) {
         Scanner indtasning = new Scanner(System.in);
-        String string_in;
+        String string_in, language;
         int antal_kant, n;
         String[] dialog = new String[11];
-
-        try {
-            File file = new File("C:/Users/tsr_0/IdeaProjects/CDIOdel2Gruppe1/src/Sprog/Dansk");    //creates a new file instance
-            FileReader fr = new FileReader(file);   //reads the file
-            BufferedReader br = new BufferedReader(fr);  //creates a buffering character input stream
-            StringBuffer sb = new StringBuffer();    //constructs a string buffer with no characters
-            String line;
-            n=0;
-            while ((line = br.readLine()) != null) {
-                sb.append(line);      //appends line to string buffer
-                sb.append("\n");     //line feed
-                dialog[n]=line;
-                System.out.println(line);
-                n++;
-            }
-
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
+        File fil;
 
 
-     //   System.out.println("Der er forhåndsvalgt terninger med 6 kanter. Tast eter for at vælge dette. Ellers indtast det ønskede antal kanter i terningen og tast enter");
-
-        System.out.println(dialog[0]);
-        string_in=indtasning.nextLine();
-        System.out.println(string_in);
-        if (string_in.length() > 0) {
-            antal_kant = (int) string_in.charAt(0) - '0';
-        }
-        else antal_kant = 6;
-        System.out.println(antal_kant);
 
         //Fields get defined:
         GUI_Street[] fields = new GUI_Street[11];
@@ -67,9 +40,46 @@ public class Main {
 
         GUI gui = new GUI(fields, Color.WHITE);
 
+        language=gui.getUserString("d: dansk e: english");
+
+        try {
+              if (language.equals("d")) {
+                   fil = new File("C:/Users/tsr_0/IdeaProjects/CDIOdel2Gruppe1/src/Sprog/Dansk");
+                  //           File file = new File("$INTELLIJ_ROOT$/CDIOdel2Gruppe1/src/Sprog/Dansk");
+              }
+              else
+              {
+                   fil = new File("C:/Users/tsr_0/IdeaProjects/CDIOdel2Gruppe1/src/Sprog/English");
+                  //           File file = new File("$INTELLIJ_ROOT$/CDIOdel2Gruppe1/src/Sprog/English");
+              }
+            FileReader fil_leaser = new FileReader(fil);
+            BufferedReader br = new BufferedReader(fil_leaser);
+
+            n=0;
+            while ((string_in = br.readLine()) != null) {
+
+                dialog[n]=string_in;
+                System.out.println(string_in);
+                n++;
+            }
+
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+
+
+        string_in=gui.getUserString(dialog[0]);
+        System.out.println(string_in);
+        if (string_in.length() > 0) {
+            antal_kant = (int) string_in.charAt(0) - '0';
+        }
+        else antal_kant = 6;
+        System.out.println(antal_kant);
         //Initializes players with name inputs
-        GUI_Player player1 = new GUI_Player(gui.getUserString("Hvem er Spiller 1?"), 1000);
-        GUI_Player player2 = new GUI_Player(gui.getUserString("Hvem er Spiller 2?"), 1000);
+        GUI_Player player1 = new GUI_Player(gui.getUserString(dialog[1]), 1000);
+        GUI_Player player2 = new GUI_Player(gui.getUserString(dialog[2]), 1000);
         gui.addPlayer(player1);
         gui.addPlayer(player2);
 
@@ -78,7 +88,7 @@ public class Main {
         fields[0].setCar(player2, true);
 
         //Selects who starts the game by selection in gui
-        boolean selection = gui.getUserLeftButtonPressed("Hvem starter spillet?", player1.getName(), player2.getName());
+        boolean selection = gui.getUserLeftButtonPressed(dialog[3], player1.getName(), player2.getName());
 
         //Create a selected player that will point at active player
         GUI_Player selectedPlayer = null;
@@ -102,7 +112,7 @@ public class Main {
             d1.dice_roll();
             d2.dice_roll();
 
-            String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
+            String s = gui.getUserButtonPressed(dialog[4]+" " + selectedPlayer.getName() + dialog[5], dialog[6]);
             //Uses balance value in GUI, since it displays on GUI at all times, and works like a score.
 
             //Moving cars on the fields - and taking consequence of field
@@ -148,11 +158,11 @@ public class Main {
 
                 //Extra tur
             else if (!(selectedPlayer.getBalance()>3000)){
-                gui.showMessage(selectedPlayer.getName() + " Du har fået en ekstra tur, fordi du ramte felt 8: ") ; }
+                gui.showMessage(selectedPlayer.getName() + dialog[7]) ; }
         }
 
         //when loop ends, show message
-        gui.showMessage(selectedPlayer.getName() + " Har vundet med en score på: " + selectedPlayer.getBalance());
+        gui.showMessage(selectedPlayer.getName() + dialog[8] + selectedPlayer.getBalance());
     }
 
     private static int getSum(Die d1,Die d2){
