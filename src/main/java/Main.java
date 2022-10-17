@@ -3,10 +3,7 @@ import gui_fields.GUI_Street;
 import gui_main.GUI;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+//import java.io.File;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -15,12 +12,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Main {
+
+
+
     public static void main(String[] args) {
         Scanner indtasning = new Scanner(System.in);
-        String string_in, language;
-        int antal_kant, n;
+        String string_in, language, path_file;
         String[] dialog = new String[11];
-        File fil;
+        int antal_kant, n;
 
 
 
@@ -38,45 +37,26 @@ public class Main {
         fields[9] = new GUI_Street("11 The pit ", "-50", "", "-50", Color.RED, Color.BLACK);
         fields[10] = new GUI_Street("12 Goldmine ", "+650", "", "+650", Color.GREEN, Color.BLACK);
 
-        GUI gui = new GUI(fields, Color.WHITE);
+        GUI gui = new GUI(fields, Color.WHITE); //setup GUI
 
-        language=gui.getUserString("d: dansk e: english");
-
-        try {
-              if (language.equals("d")) {
-                   fil = new File("C:/Users/tsr_0/IdeaProjects/CDIOdel2Gruppe1/src/Sprog/Dansk");
-                  //           File file = new File("$INTELLIJ_ROOT$/CDIOdel2Gruppe1/src/Sprog/Dansk");
-              }
-              else
-              {
-                   fil = new File("C:/Users/tsr_0/IdeaProjects/CDIOdel2Gruppe1/src/Sprog/English");
-                  //           File file = new File("$INTELLIJ_ROOT$/CDIOdel2Gruppe1/src/Sprog/English");
-              }
-            FileReader fil_leaser = new FileReader(fil);
-            BufferedReader br = new BufferedReader(fil_leaser);
-
-            n=0;
-            while ((string_in = br.readLine()) != null) {
-
-                dialog[n]=string_in;
-                System.out.println(string_in);
-                n++;
-            }
-
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
+        language=gui.getUserString("d: dansk e: english"); // Select language for the game dialog
 
 
-        string_in=gui.getUserString(dialog[0]);
-        System.out.println(string_in);
+        initializeDialog(dialog, language); // Initialize the game dialog
+
+        string_in=gui.getUserString(dialog[0]); //Quest the number of sides for the dice
+
+        //Set the number sides for the dices
         if (string_in.length() > 0) {
             antal_kant = (int) string_in.charAt(0) - '0';
+            if (antal_kant > 6)
+                antal_kant = 6;
+            if (antal_kant < 2)
+                antal_kant = 2;
         }
         else antal_kant = 6;
-        System.out.println(antal_kant);
+
+
         //Initializes players with name inputs
         GUI_Player player1 = new GUI_Player(gui.getUserString(dialog[1]), 1000);
         GUI_Player player2 = new GUI_Player(gui.getUserString(dialog[2]), 1000);
@@ -94,9 +74,11 @@ public class Main {
         GUI_Player selectedPlayer = null;
         boolean gameEnd = false, lastMax=false;
 
+        //Create the dices. Default 6 sides
         Die d1 = new Die();
         Die d2 = new Die();
 
+        // If sides are different from 6, set the number of sides.
         if (antal_kant != 6)
         {
             d1.setNumberOfSides(antal_kant);
@@ -104,14 +86,17 @@ public class Main {
         }
 
 
+
         //Game loop
         while (player1.getBalance() < 3000 && player2.getBalance() < 3000 && !gameEnd ) {
             if (selection) selectedPlayer = player1;
             else selectedPlayer = player2;
 
+            //roll the dices
             d1.dice_roll();
             d2.dice_roll();
 
+            //Inform which user is playing
             String s = gui.getUserButtonPressed(dialog[4]+" " + selectedPlayer.getName() + dialog[5], dialog[6]);
             //Uses balance value in GUI, since it displays on GUI at all times, and works like a score.
 
@@ -144,7 +129,7 @@ public class Main {
                 selectedPlayer.setBalance(selectedPlayer.getBalance() + konsekvens);
             }
 
-            //Randomiser for dice positioning on the board
+            //Randomise for dice positioning on the board
             int random_numx = ThreadLocalRandom.current().nextInt(4, 6);
             int random_numy = ThreadLocalRandom.current().nextInt(4, 6);
             int random_num1 = ThreadLocalRandom.current().nextInt(1, 2);
@@ -156,7 +141,7 @@ public class Main {
             if (!(Integer.parseInt(fields[getSum(d1,d2)-2].getRent())==-80))
                 selection = !selection;
 
-                //Extra tur
+                //Extra tour
             else if (!(selectedPlayer.getBalance()>3000)){
                 gui.showMessage(selectedPlayer.getName() + dialog[7]) ; }
         }
@@ -170,5 +155,38 @@ public class Main {
     }
     private static boolean getEquals(Die d1,Die d2){
         return (d1.getFaceValue()==d2.getFaceValue());
+    }
+
+
+
+
+
+
+    private static void initializeDialog(String[] dialog, String sprog)
+    {
+        if (sprog.equals("d"))
+        {
+           dialog[0] = "Der er forhåndsvalgt terninger med 6 kanter. Tast enter for at vælge dette. Ellers indtast det ønskede antal kanter  (2 - 5) og tast enter";
+            dialog[1] = "Hvem er Spiller 1?";
+            dialog[2] = "Hvem er Spiller 2?";
+            dialog[3] = "Hvem starter spillet?";
+            dialog[4] = "Det er";
+            dialog[5] = " der har tur";
+            dialog[6] = "Rul med terningerne";
+            dialog[7] = " Du har fået en ekstra tur, fordi du ramte felt 8.";
+            dialog[8] = " Har vundet med en score på:";
+        }
+        else
+        {
+            dialog[0] = "A dice with six sides are default chosen. Please press enter to select this. Or enter the number of sides (2 - 5) you wish:";
+            dialog[1] = "Who is Player 1?";
+            dialog[2] = "Who is Player 2?";
+            dialog[3] = "Who starts the game?";
+            dialog[4] = "It is";
+            dialog[5] = " playing";
+            dialog[6] = "Please roll the dices";
+            dialog[7] = " You have an ekstra dice roll, because you have hit field 8.";
+            dialog[8] = " has won with the score:";
+        }
     }
 }
