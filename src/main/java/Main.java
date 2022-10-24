@@ -17,11 +17,15 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner indtasning = new Scanner(System.in);
-        String string_in, language, path_file;
+        String string_in, language, answer_game;
         String[] dialog = new String[11];
         int antal_kant, n;
+        boolean language_ok, game_running, answerGameOk;
 
+        game_running=true;
 
+        do
+        {
 
         //Fields get defined:
         GUI_Street[] fields = new GUI_Street[11];
@@ -39,7 +43,18 @@ public class Main {
 
         GUI gui = new GUI(fields, Color.WHITE); //setup GUI
 
-        language=gui.getUserString("d: dansk e: english"); // Select language for the game dialog
+
+
+
+
+        language_ok=false;
+
+
+            do {
+                language=gui.getUserString("d: dansk e: english"); // Select language for the game dialog
+                if (language.equals("d")) language_ok=true;
+                if (language.equals("e")) language_ok=true;
+            } while (!language_ok);
 
 
         initializeDialog(dialog, language); // Initialize the game dialog
@@ -148,6 +163,25 @@ public class Main {
 
         //when loop ends, show message
         gui.showMessage(selectedPlayer.getName() + dialog[8] + selectedPlayer.getBalance());
+
+
+        answerGameOk=false;
+            do {
+                answer_game=gui.getUserString(dialog[9]); // Select language for the game dialog
+
+                if (language.equals("d") && answer_game.equals("n")) {
+                    game_running = false;
+                    answerGameOk=true;
+                }
+
+                if (language.equals("e") && answer_game.equals("n")) {
+                    game_running = false;
+                    answerGameOk=true;
+                }
+                if (answer_game.equals("y") || answer_game.equals("j")) answerGameOk=true;
+            } while (!answerGameOk);
+
+        } while (game_running=true);
     }
 
     private static int getSum(Die d1,Die d2){
@@ -175,6 +209,7 @@ public class Main {
             dialog[6] = "Rul med terningerne";
             dialog[7] = " Du har fået en ekstra tur, fordi du ramte felt 8.";
             dialog[8] = " Har vundet med en score på:";
+            dialog[9] = " Ney spil (j/n)";
         }
         else
         {
@@ -185,8 +220,9 @@ public class Main {
             dialog[4] = "It is";
             dialog[5] = " playing";
             dialog[6] = "Please roll the dices";
-            dialog[7] = " You have an ekstra dice roll, because you have hit field 8.";
+            dialog[7] = " You have an additional dice roll, because you have hit field 8.";
             dialog[8] = " has won with the score:";
+            dialog[9] = " A new game (y/n";
         }
     }
 }
