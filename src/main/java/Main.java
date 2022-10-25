@@ -73,8 +73,8 @@ public class Main {
         GUI_Car p2car = new GUI_Car(Color.RED, Color.WHITE, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL);
 
         //Initializes players with name inputs
-        GUI_Player player1 = new GUI_Player(gui.getUserString(dialog[1]), 1000);
-        GUI_Player player2 = new GUI_Player(gui.getUserString(dialog[2]), 1000);
+        GUI_Player player1 = new GUI_Player(gui.getUserString(dialog[1]), 1000, p1car);
+        GUI_Player player2 = new GUI_Player(gui.getUserString(dialog[2]), 1000, p2car);
         gui.addPlayer(player1);
         gui.addPlayer(player2);
 
@@ -147,7 +147,7 @@ public class Main {
 
 
             //Shows description of the space you land on, and changes color
-            gui.displayChanceCard(fields[getSum(d1, d2) - 2].getTitle() + "\n" + fields[getSum(d1, d2) - 2].getSubText());
+            gui.displayChanceCard(selectedPlayer.getName() +" | "+ fields[getSum(d1, d2) - 2].getTitle() + "\n" + fields[getSum(d1, d2) - 2].getSubText());
             if (Integer.parseInt(fields[getSum(d1, d2) - 2].getRent()) > 0)
                 GUI_Center.getInstance().setBGColor(Color.GREEN);
             else if (Integer.parseInt(fields[getSum(d1, d2) - 2].getRent()) == -80)
