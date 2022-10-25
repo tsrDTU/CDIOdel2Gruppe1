@@ -45,7 +45,7 @@ public class Main {
 
             do
             {
-                language = gui.getUserString("d: dansk e: english f: francais"); // Select language for the game dialog
+                language = gui.getUserString("d: dansk e: english f: francais g: german"); // Select language for the game dialog
                 if (language.equals("d")) language_ok = true;
                 if (language.equals("e")) language_ok = true;
                 if (language.equals("f")) language_ok = true;
