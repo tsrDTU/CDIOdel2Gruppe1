@@ -138,6 +138,9 @@ public class Main {
                     //Deposit/Withdraw money from fields on the board
                     int konsekvens = Integer.parseInt(fields[getSum(d1, d2) - 2].getRent());
                     selectedPlayer.setBalance(selectedPlayer.getBalance() + konsekvens);
+
+                    //Negative balance is not allowed
+                    if (selectedPlayer.getBalance() < 0) selectedPlayer.setBalance(0);
                 }
 
                 //Randomise for dice positioning on the board
