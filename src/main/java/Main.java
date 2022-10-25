@@ -11,22 +11,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import gui_fields.GUI_Car;
 import gui_codebehind.GUI_Center;
 import java.awt.Color;
-public class Main {
-        public static void main(String[] args) {
-        //Fields get defined:
-        GUI_Street[] fields = new GUI_Street[11];
-        fields[0] = new GUI_Street("2 Tower ", "+250", "Du finder et tårn med 250mønter","250", Color.GREEN, Color.BLACK);
-        fields[1] = new GUI_Street("3 Crater ", "-100", "Du ryger ned i et krater og mister 100mønter", "-100", Color.RED, Color.BLACK);
-        fields[2] = new GUI_Street("4 Palace gates", "+100", "Du finder et palads og får 100mønter", "+100", Color.GREEN, Color.BLACK);
-        fields[3] = new GUI_Street("5 Cold Desert", "-20", "Du kommer forbi en kold ørken og taber 20mønter", "-20", Color.RED, Color.BLACK);
-        fields[4] = new GUI_Street("6 Walled city", "+180", "Du finder en godt bevogtet by og får 180mønter", "+180", Color.GREEN, Color.BLACK);
-        fields[5] = new GUI_Street("7 Monastery ", "0", "Du finder et kloster", "0", Color.YELLOW, Color.BLACK);
-        fields[6] = new GUI_Street("8 Black cave ", "-70", "Du falder i en mørk grotte og taber 70mønter", "-70", Color.RED, Color.BLACK);
-        fields[7] = new GUI_Street("9 Huts in the mountain", "+60", "Du finder en hytte i bjergende med 60mønter", "+60", Color.GREEN, Color.BLACK);
-        fields[8] = new GUI_Street("10 The Werewall", "-80 Ekstra tur", "Du finder vareulvevægen og mister 80mønter, men opnår en eksta tur", "-80", Color.GRAY, Color.BLACK);
-        fields[9] = new GUI_Street("11 The pit ", "-50", "du falder i et hul og taber 50mønter", "-50", Color.RED, Color.BLACK);
-        fields[10] = new GUI_Street("12 Goldmine ", "+650", "Du når guldminen og tjener 650", "+650", Color.GREEN, Color.BLACK);
-
 
 public class Main
 {
@@ -63,7 +47,7 @@ public class Main
 
             language_ok = false;
 
-            GUI gui = new GUI(fields, Color.WHITE);
+            GUI gui2 = new GUI(fields, Color.WHITE);
 
             do
             {
@@ -164,7 +148,7 @@ public class Main
                     int konsekvens = Integer.parseInt(fields[getSum(d1, d2) - 2].getRent());
                     selectedPlayer.setBalance(selectedPlayer.getBalance() + konsekvens);
                 }
-            String s = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
+            String tur = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
             //Prints a button and some text for throwing dice
 
             d1 = new Die();
