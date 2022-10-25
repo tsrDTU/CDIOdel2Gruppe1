@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner indtasning = new Scanner(System.in);
         String string_in, language, answer_game;
-        String[] dialog = new String[11];
+        String[] dialog = new String[12];
         int antal_kant, n;
         boolean language_ok, game_running, answerGameOk;
 
@@ -139,7 +139,7 @@ public class Main {
                 }
                 //Deposit/Withdraw money from fields on the board
                 int konsekvens = Integer.parseInt(fields[getSum(d1, d2) - 2].getRent());
-                selectedPlayer.setBalance(selectedPlayer.getBalance() + konsekvens);
+                selectedPlayer.setBalance(selectedPlayer.getBalance() + konsekvens * 5);
 
                 //Negative balance is not allowed
                 if (selectedPlayer.getBalance() < 0) selectedPlayer.setBalance(0);
@@ -147,7 +147,7 @@ public class Main {
 
 
             //Shows description of the space you land on, and changes color
-            gui.displayChanceCard(selectedPlayer.getName() +" | "+ fields[getSum(d1, d2) - 2].getTitle() + "\n" + fields[getSum(d1, d2) - 2].getSubText());
+            gui.displayChanceCard(selectedPlayer.getName() + " | " + fields[getSum(d1, d2) - 2].getTitle() + "\n" + fields[getSum(d1, d2) - 2].getSubText());
             if (Integer.parseInt(fields[getSum(d1, d2) - 2].getRent()) > 0)
                 GUI_Center.getInstance().setBGColor(Color.GREEN);
             else if (Integer.parseInt(fields[getSum(d1, d2) - 2].getRent()) == -80)
@@ -156,10 +156,6 @@ public class Main {
                 GUI_Center.getInstance().setBGColor(Color.RED);
             else
                 GUI_Center.getInstance().setBGColor(Color.YELLOW);
-
-            //Deposit/Withdraw money from fields on the board
-            int konsekvens = Integer.parseInt(fields[getSum(d1, d2) - 2].getRent());
-            selectedPlayer.setBalance(selectedPlayer.getBalance() + konsekvens);
 
 
             //Randomiser for dice positioning on the board
@@ -178,23 +174,32 @@ public class Main {
             else if (!(selectedPlayer.getBalance() > 3000)) {
                 gui.showMessage(selectedPlayer.getName() + dialog[7]);
             }
-        }
 
+
+            answerGameOk = false;
+            if (selectedPlayer.getBalance() > 3000) {
+            do {
+                answer_game = gui.getUserButtonPressed(dialog[9], dialog[10], dialog[11]); // Select language for the game dialog
+
+                if (answer_game.equals(dialog[11])) {
+                    game_running = false;
+                    answerGameOk = true;
+                }
+
+                if (answer_game.equals("y") || answer_game.equals("j") || answer_game.equals("o") || answer_game.equals(dialog[10])) {
+                    answerGameOk = true;
+                    game_running = true;
+                    player1.setBalance(1000);
+                    player2.setBalance(1000);
+                    for (int i =0;i<11;i++) fields[i].removeAllCars();
+                    fields[0].setCar(player1, true);
+                    fields[0].setCar(player2, true);
+                }
+            } while (!answerGameOk);
+        }}
         //when loop ends, show message
         gui.showMessage(selectedPlayer.getName() + dialog[8] + selectedPlayer.getBalance());
 
-
-        answerGameOk = false;
-        do {
-            answer_game = gui.getUserString(dialog[9]); // Select language for the game dialog
-
-            if (answer_game.equals("n")) {
-                game_running = false;
-                answerGameOk = true;
-            }
-
-            if (answer_game.equals("y") || answer_game.equals("j") || answer_game.equals("o")) answerGameOk = true;
-        } while (!answerGameOk);
 
         while (game_running == true) ;
         System.exit(0);
@@ -221,7 +226,9 @@ public class Main {
             dialog[6] = "Rul med terningerne";
             dialog[7] = " Du har fået en ekstra tur, fordi du ramte felt 8.";
             dialog[8] = " Har vundet med en score på:";
-            dialog[9] = " Nyt spil (j/n)?";
+            dialog[9] = " Nyt spil?";
+            dialog[10] = "Ja";
+            dialog[11] = "Nej";
 
         } else if (sprog.equals("Francias")) {
         dialog[0] = "Un dé à six faces est choisi par défaut. Veuillez appuyer sur Entrée pour le sélectionner. Ou entrez le nombre de faces (2 - 5) que vous souhaitez:";
@@ -233,7 +240,9 @@ public class Main {
         dialog[6] = "Veuillez lancer les dés";
         dialog[7] = "Vous avez un jet de dé supplémentaire, car vous avez touché la case 8.";
         dialog[8] = "a gagné avec le score";
-        dialog[9] = "Un nouveau jeu (o/n)?";
+        dialog[9] = "Un nouveau jeu?";
+        dialog[10] = "Oui";
+        dialog[11] = "Non";
 
         } else if (sprog.equals("English")) {
             dialog[0] = "A dice with six sides are default chosen. Please press enter to select this. Or enter the number of sides (2 - 5) you wish:";
@@ -245,7 +254,9 @@ public class Main {
             dialog[6] = "Please roll the dices";
             dialog[7] = " You have an additional dice roll, because you have hit field 8.";
             dialog[8] = " has won with the score:";
-            dialog[9] = " A new game (y/n)?";
+            dialog[9] = " A new game?";
+            dialog[10] = "Yes";
+            dialog[11] = "No";
 
         } else if (sprog.equals("German")) {
             dialog[0] = "Es gibt vorgewählte Würfel mit 6 Kanten. Drücken Sie die Eingabetaste, um dies auszuwählen. Geben Sie andernfalls die gewünschte Anzahl von Kanten (2 - 5) ein und drücken Sie die Eingabetaste";
@@ -257,7 +268,9 @@ public class Main {
             dialog[6] = "Bitte würfeln";
             dialog[7] = " Du hast einen zusätzlichen Würfelwurf, weil du Feld 8 getroffen hast.";
             dialog[8] = " hat mit der Partitur gewonnen:";
-            dialog[9] = " Ein neues Spiel (j/n)?";
+            dialog[9] = " Ein neues Spiel?";
+            dialog[10] = "Ja";
+            dialog[11] = "Nein";
 
 
         }
