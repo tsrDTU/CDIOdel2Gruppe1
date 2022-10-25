@@ -46,11 +46,11 @@ public class Main {
 
 
         do {
-            language = gui.getUserString("d: dansk e: english f: francais g: german"); // Select language for the game dialog
-            if (language.equals("d")) language_ok = true;
-            if (language.equals("e")) language_ok = true;
-            if (language.equals("f")) language_ok = true;
-            if (language.equals("g")) language_ok = true;
+            language = gui.getUserButtonPressed("Select Langage:","Dansk", "English", "Francias", "German"); // Select language for the game dialog
+            if (language.equals("Dansk")) language_ok = true;
+            if (language.equals("English")) language_ok = true;
+            if (language.equals("Francias")) language_ok = true;
+            if (language.equals("German")) language_ok = true;
         } while (!language_ok);
 
 
@@ -211,7 +211,7 @@ public class Main {
 
 
     private static void initializeDialog(String[] dialog, String sprog) {
-        if (sprog.equals("d")) {
+        if (sprog.equals("Dansk")) {
             dialog[0] = "Der er forhåndsvalgt terninger med 6 kanter. Tast enter for at vælge dette. Ellers indtast det ønskede antal kanter  (2 - 5) og tast enter";
             dialog[1] = "Hvem er Spiller 1?";
             dialog[2] = "Hvem er Spiller 2?";
@@ -223,7 +223,7 @@ public class Main {
             dialog[8] = " Har vundet med en score på:";
             dialog[9] = " Nyt spil (j/n)?";
 
-        } else if (sprog.equals("f")) {
+        } else if (sprog.equals("Francias")) {
         dialog[0] = "Un dé à six faces est choisi par défaut. Veuillez appuyer sur Entrée pour le sélectionner. Ou entrez le nombre de faces (2 - 5) que vous souhaitez:";
         dialog[1] = "Qui est le joueur 1?";
         dialog[2] = "Qui est le joueur 2?";
@@ -235,7 +235,7 @@ public class Main {
         dialog[8] = "a gagné avec le score";
         dialog[9] = "Un nouveau jeu (o/n)?";
 
-        } else if (sprog.equals("e")) {
+        } else if (sprog.equals("English")) {
             dialog[0] = "A dice with six sides are default chosen. Please press enter to select this. Or enter the number of sides (2 - 5) you wish:";
             dialog[1] = "Who is Player 1?";
             dialog[2] = "Who is Player 2?";
@@ -247,7 +247,7 @@ public class Main {
             dialog[8] = " has won with the score:";
             dialog[9] = " A new game (y/n)?";
 
-        } else if (sprog.equals("g")) {
+        } else if (sprog.equals("German")) {
             dialog[0] = "Es gibt vorgewählte Würfel mit 6 Kanten. Drücken Sie die Eingabetaste, um dies auszuwählen. Geben Sie andernfalls die gewünschte Anzahl von Kanten (2 - 5) ein und drücken Sie die Eingabetaste";
             dialog[1] = "Wer ist Spieler 1?";
             dialog[2] = "Wer ist Spieler 2?";
