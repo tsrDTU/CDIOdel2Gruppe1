@@ -42,10 +42,13 @@ public class Main {
             language_ok = false;
 
 
-            do {
-                language = gui.getUserString("d: dansk e: english g:german"); // Select language for the game dialog
+
+            do
+            {
+                language = gui.getUserString("d: dansk e: english f: francais"); // Select language for the game dialog
                 if (language.equals("d")) language_ok = true;
                 if (language.equals("e")) language_ok = true;
+                if (language.equals("f")) language_ok = true;
                 if (language.equals("g")) language_ok = true;
             } while (!language_ok);
 
@@ -53,12 +56,14 @@ public class Main {
             initializeDialog(dialog, language); // Initialize the game dialog
 
 
-            do {
+            do
+            {
                 string_in = gui.getUserString(dialog[0]); //Quest the number of sides for the dice
 
                 //Set the number sides for the dices
 
-                if (string_in.length() > 0) {
+                if (string_in.length() > 0)
+                {
                     antal_kant = (int) string_in.charAt(0) - '0';
 
                 } else antal_kant = 6;
@@ -166,7 +171,7 @@ public class Main {
                     answerGameOk = true;
                 }
 
-                if (answer_game.equals("y") || answer_game.equals("j")) answerGameOk = true;
+                if (answer_game.equals("y") || answer_game.equals("j") || answer_game.equals("o")) answerGameOk = true;
             } while (!answerGameOk);
 
         } while (game_running == true);
@@ -194,6 +199,18 @@ public class Main {
             dialog[7] = " Du har fået en ekstra tur, fordi du ramte felt 8.";
             dialog[8] = " Har vundet med en score på:";
             dialog[9] = " Nyt spil (j/n)?";
+
+        } else if (sprog.equals("f")) {
+        dialog[0] = "Un dé à six faces est choisi par défaut. Veuillez appuyer sur Entrée pour le sélectionner. Ou entrez le nombre de faces (2 - 5) que vous souhaitez:";
+        dialog[1] = "Qui est le joueur 1?";
+        dialog[2] = "Qui est le joueur 2?";
+        dialog[3] = "Qui commence le jeu?";
+        dialog[4] = "Il est";
+        dialog[5] = " El jouant";
+        dialog[6] = "Veuillez lancer les dés";
+        dialog[7] = "Vous avez un jet de dé supplémentaire, car vous avez touché la case 8.";
+        dialog[8] = "a gagné avec le score";
+        dialog[9] = "Un nouveau jeu (o/n)?";
 
         } else if (sprog.equals("e")) {
             dialog[0] = "A dice with six sides are default chosen. Please press enter to select this. Or enter the number of sides (2 - 5) you wish:";
@@ -224,4 +241,3 @@ public class Main {
 
     }
 }
-
