@@ -8,8 +8,7 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 
-public class Main
-{
+public class Main {
 
 
     public static void main(String[] args) {
@@ -21,8 +20,7 @@ public class Main
 
         game_running = true;
 
-        do
-        {
+        do {
 
             //Fields get defined:
             GUI_Street[] fields = new GUI_Street[11];
@@ -44,25 +42,23 @@ public class Main
             language_ok = false;
 
 
-            do
-            {
-                language = gui.getUserString("d: dansk e: english"); // Select language for the game dialog
+            do {
+                language = gui.getUserString("d: dansk e: english g:german"); // Select language for the game dialog
                 if (language.equals("d")) language_ok = true;
                 if (language.equals("e")) language_ok = true;
+                if (language.equals("g")) language_ok = true;
             } while (!language_ok);
 
 
             initializeDialog(dialog, language); // Initialize the game dialog
 
 
-            do
-            {
+            do {
                 string_in = gui.getUserString(dialog[0]); //Quest the number of sides for the dice
 
                 //Set the number sides for the dices
 
-                if (string_in.length() > 0)
-                {
+                if (string_in.length() > 0) {
                     antal_kant = (int) string_in.charAt(0) - '0';
 
                 } else antal_kant = 6;
@@ -91,16 +87,14 @@ public class Main
             Die d2 = new Die();
 
             // If sides are different from 6, set the number of sides.
-            if (antal_kant != 6)
-            {
+            if (antal_kant != 6) {
                 d1.setNumberOfSides(antal_kant);
                 d2.setNumberOfSides(antal_kant);
             }
 
 
             //Game loop
-            while (player1.getBalance() < 3000 && player2.getBalance() < 3000 && !gameEnd)
-            {
+            while (player1.getBalance() < 3000 && player2.getBalance() < 3000 && !gameEnd) {
                 if (selection) selectedPlayer = player1;
                 else selectedPlayer = player2;
 
@@ -164,12 +158,10 @@ public class Main
 
 
             answerGameOk = false;
-            do
-            {
+            do {
                 answer_game = gui.getUserString(dialog[9]); // Select language for the game dialog
 
-                if (answer_game.equals("n"))
-                {
+                if (answer_game.equals("n")) {
                     game_running = false;
                     answerGameOk = true;
                 }
@@ -181,21 +173,17 @@ public class Main
         System.exit(0);
     }
 
-    private static int getSum(Die d1, Die d2)
-    {
+    private static int getSum(Die d1, Die d2) {
         return d1.getFaceValue() + d2.getFaceValue();
     }
 
-    private static boolean getEquals(Die d1, Die d2)
-    {
+    private static boolean getEquals(Die d1, Die d2) {
         return (d1.getFaceValue() == d2.getFaceValue());
     }
 
 
-    private static void initializeDialog(String[] dialog, String sprog)
-    {
-        if (sprog.equals("d"))
-        {
+    private static void initializeDialog(String[] dialog, String sprog) {
+        if (sprog.equals("d")) {
             dialog[0] = "Der er forhåndsvalgt terninger med 6 kanter. Tast enter for at vælge dette. Ellers indtast det ønskede antal kanter  (2 - 5) og tast enter";
             dialog[1] = "Hvem er Spiller 1?";
             dialog[2] = "Hvem er Spiller 2?";
@@ -206,8 +194,8 @@ public class Main
             dialog[7] = " Du har fået en ekstra tur, fordi du ramte felt 8.";
             dialog[8] = " Har vundet med en score på:";
             dialog[9] = " Nyt spil (j/n)?";
-        } else
-        {
+
+        } else if (sprog.equals("e")) {
             dialog[0] = "A dice with six sides are default chosen. Please press enter to select this. Or enter the number of sides (2 - 5) you wish:";
             dialog[1] = "Who is Player 1?";
             dialog[2] = "Who is Player 2?";
@@ -218,6 +206,22 @@ public class Main
             dialog[7] = " You have an additional dice roll, because you have hit field 8.";
             dialog[8] = " has won with the score:";
             dialog[9] = " A new game (y/n)?";
+
+        } else if (sprog.equals("g")) {
+            dialog[0] = "Es gibt vorgewählte Würfel mit 6 Kanten. Drücken Sie die Eingabetaste, um dies auszuwählen. Geben Sie andernfalls die gewünschte Anzahl von Kanten (2 - 5) ein und drücken Sie die Eingabetaste";
+            dialog[1] = "Wer ist Spieler 1?";
+            dialog[2] = "Wer ist Spieler 2?";
+            dialog[3] = "Wer startet das Spiel?";
+            dialog[4] = "Es ist";
+            dialog[5] = " spielen";
+            dialog[6] = "Bitte würfeln";
+            dialog[7] = " Du hast einen zusätzlichen Würfelwurf, weil du Feld 8 getroffen hast.";
+            dialog[8] = " hat mit der Partitur gewonnen:";
+            dialog[9] = " Ein neues Spiel (j/n)?";
+
+
         }
+
     }
 }
+
