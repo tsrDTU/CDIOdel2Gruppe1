@@ -46,9 +46,10 @@ public class Main
 
             do
             {
-                language = gui.getUserString("d: dansk e: english"); // Select language for the game dialog
+                language = gui.getUserString("d: dansk e: english f: francais"); // Select language for the game dialog
                 if (language.equals("d")) language_ok = true;
                 if (language.equals("e")) language_ok = true;
+                if (language.equals("f")) language_ok = true;
             } while (!language_ok);
 
 
@@ -174,7 +175,7 @@ public class Main
                     answerGameOk = true;
                 }
 
-                if (answer_game.equals("y") || answer_game.equals("j")) answerGameOk = true;
+                if (answer_game.equals("y") || answer_game.equals("j") || answer_game.equals("o")) answerGameOk = true;
             } while (!answerGameOk);
 
         } while (game_running == true);
@@ -206,8 +207,20 @@ public class Main
             dialog[7] = " Du har fået en ekstra tur, fordi du ramte felt 8.";
             dialog[8] = " Har vundet med en score på:";
             dialog[9] = " Nyt spil (j/n)?";
-        } else
-        {
+
+        } else if (sprog.equals("f")) {
+        dialog[0] = "Un dé à six faces est choisi par défaut. Veuillez appuyer sur Entrée pour le sélectionner. Ou entrez le nombre de faces (2 - 5) que vous souhaitez:";
+        dialog[1] = "Qui est le joueur 1?";
+        dialog[2] = "Qui est le joueur 2?";
+        dialog[3] = "Qui commence le jeu?";
+        dialog[4] = "Il est";
+        dialog[5] = " El jouant";
+        dialog[6] = "Veuillez lancer les dés";
+        dialog[7] = "Vous avez un jet de dé supplémentaire, car vous avez touché la case 8.";
+        dialog[8] = "a gagné avec le score";
+        dialog[9] = "Un nouveau jeu (o/n)?";
+
+        } else {
             dialog[0] = "A dice with six sides are default chosen. Please press enter to select this. Or enter the number of sides (2 - 5) you wish:";
             dialog[1] = "Who is Player 1?";
             dialog[2] = "Who is Player 2?";
@@ -218,6 +231,9 @@ public class Main
             dialog[7] = " You have an additional dice roll, because you have hit field 8.";
             dialog[8] = " has won with the score:";
             dialog[9] = " A new game (y/n)?";
-        }
     }
-}
+
+
+    }
+    }
+
