@@ -47,7 +47,6 @@ public class Main
 
             language_ok = false;
 
-            GUI gui2 = new GUI(fields, Color.WHITE);
 
             do
             {
@@ -107,8 +106,7 @@ public class Main
 
 
             //Game loop
-            while (player1.getBalance() < 3000 && player2.getBalance() < 3000 && !gameEnd)
-            {
+            while (player1.getBalance() < 3000 && player2.getBalance() < 3000 && !gameEnd) {
                 if (selection) selectedPlayer = player1;
                 else selectedPlayer = player2;
 
@@ -148,69 +146,69 @@ public class Main
                     int konsekvens = Integer.parseInt(fields[getSum(d1, d2) - 2].getRent());
                     selectedPlayer.setBalance(selectedPlayer.getBalance() + konsekvens);
                 }
-            String tur = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
-            //Prints a button and some text for throwing dice
+                String tur = gui.getUserButtonPressed("Det er " + selectedPlayer.getName() + " der har tur", "Rul med terningerne");
+                //Prints a button and some text for throwing dice
 
-            d1 = new Die();
-           d2 = new Die();
+                d1 = new Die();
+                d2 = new Die();
 
-           //Moving cars on the fields - and taking consequence of field
-           if(player1.getBalance()<3000 && player2.getBalance()<3000) {
-           //Check car locations and set new car locations
-           for (int i = 0;i<=11;i++) {
-               //Checks for 2 players on the same field
-                if (fields[i].hasCar(player1) && fields[i].hasCar((player2))) {
-                    fields[i].removeAllCars();
-                    if (selectedPlayer == player1){
-                        fields[i].setCar(player2, true);
-                        i=11;
+                //Moving cars on the fields - and taking consequence of field
+                if (player1.getBalance() < 3000 && player2.getBalance() < 3000) {
+                    //Check car locations and set new car locations
+                    for (int i = 0; i <= 11; i++) {
+                        //Checks for 2 players on the same field
+                        if (fields[i].hasCar(player1) && fields[i].hasCar((player2))) {
+                            fields[i].removeAllCars();
+                            if (selectedPlayer == player1) {
+                                fields[i].setCar(player2, true);
+                                i = 11;
+                            }
+                            //Sets car back in its original place
+                            else fields[i].setCar(player1, true);
+                            fields[getSum(d1, d2) - 2].setCar(selectedPlayer, true);
+                            i = 11;
                         }
-                    //Sets car back in its original place
-                    else fields[i].setCar(player1, true);
-                    fields[getSum(d1,d2)-2].setCar(selectedPlayer, true);
-                    i=11;
-               }
-               //Push through with changing car location
-               else if (fields[i].hasCar(selectedPlayer)) {
-                    fields[i].removeAllCars();
-                    fields[getSum(d1,d2)-2].setCar(selectedPlayer, true);
-                    i=11;
-               }
-           }
-           //Shows description of the space you land on, and changes color
-           gui.displayChanceCard(fields[getSum(d1,d2)-2].getDescription());
-               if (Integer.parseInt(fields[getSum(d1,d2)-2].getRent())>0)
-                   GUI_Center.getInstance().setBGColor(Color.GREEN);
-               else if (Integer.parseInt(fields[getSum(d1,d2)-2].getRent())==-80)
-                   GUI_Center.getInstance().setBGColor(Color.GRAY);
-               else if (Integer.parseInt(fields[getSum(d1,d2)-2].getRent())<0)
-                   GUI_Center.getInstance().setBGColor(Color.RED);
-               else
-                   GUI_Center.getInstance().setBGColor(Color.YELLOW);
+                        //Push through with changing car location
+                        else if (fields[i].hasCar(selectedPlayer)) {
+                            fields[i].removeAllCars();
+                            fields[getSum(d1, d2) - 2].setCar(selectedPlayer, true);
+                            i = 11;
+                        }
+                    }
+                    //Shows description of the space you land on, and changes color
+                    gui.displayChanceCard(fields[getSum(d1, d2) - 2].getDescription());
+                    if (Integer.parseInt(fields[getSum(d1, d2) - 2].getRent()) > 0)
+                        GUI_Center.getInstance().setBGColor(Color.GREEN);
+                    else if (Integer.parseInt(fields[getSum(d1, d2) - 2].getRent()) == -80)
+                        GUI_Center.getInstance().setBGColor(Color.GRAY);
+                    else if (Integer.parseInt(fields[getSum(d1, d2) - 2].getRent()) < 0)
+                        GUI_Center.getInstance().setBGColor(Color.RED);
+                    else
+                        GUI_Center.getInstance().setBGColor(Color.YELLOW);
 
-           //Deposit/Withdraw money from fields on the board
-           int konsekvens = Integer.parseInt(fields[getSum(d1,d2)-2].getRent());
-           selectedPlayer.setBalance(selectedPlayer.getBalance() + konsekvens);
-        }
+                    //Deposit/Withdraw money from fields on the board
+                    int konsekvens = Integer.parseInt(fields[getSum(d1, d2) - 2].getRent());
+                    selectedPlayer.setBalance(selectedPlayer.getBalance() + konsekvens);
+                }
 
-        //Randomiser for dice positioning on the board
-        int random_numx = ThreadLocalRandom.current().nextInt(4, 6);
-        int random_numy = ThreadLocalRandom.current().nextInt(5, 7);
-        int random_numz = ThreadLocalRandom.current().nextInt(5, 7);
-        //Show dice on screen
-        gui.setDice(d1.getFaceValue(),random_numx,random_numy,d2.getFaceValue(),random_numx+1,random_numz);
+                //Randomiser for dice positioning on the board
+                int random_numx = ThreadLocalRandom.current().nextInt(4, 6);
+                int random_numy = ThreadLocalRandom.current().nextInt(5, 7);
+                int random_numz = ThreadLocalRandom.current().nextInt(5, 7);
+                //Show dice on screen
+                gui.setDice(d1.getFaceValue(), random_numx, random_numy, d2.getFaceValue(), random_numx + 1, random_numz);
 
 
-        //Switch selected player
-        if (!(Integer.parseInt(fields[getSum(d1,d2)-2].getRent())==-80))
-        selection = !selection;
+                //Switch selected player
+                if (!(Integer.parseInt(fields[getSum(d1, d2) - 2].getRent()) == -80))
+                    selection = !selection;
 
                     //Extra tour
                 else if (!(selectedPlayer.getBalance() > 3000)) {
                     gui.showMessage(selectedPlayer.getName() + dialog[7]);
                 }
-            }
 
+            }
             //when loop ends, show message
             gui.showMessage(selectedPlayer.getName() + dialog[8] + selectedPlayer.getBalance());
 
