@@ -139,7 +139,7 @@ public class Main {
                 }
                 //Deposit/Withdraw money from fields on the board
                 int konsekvens = Integer.parseInt(fields[getSum(d1, d2) - 2].getRent());
-                selectedPlayer.setBalance(selectedPlayer.getBalance() + konsekvens);
+                selectedPlayer.setBalance(selectedPlayer.getBalance() + konsekvens*100);
 
                 //Negative balance is not allowed
                 if (selectedPlayer.getBalance() < 0) selectedPlayer.setBalance(0);
@@ -178,7 +178,8 @@ public class Main {
 
             answerGameOk = false;
             if (selectedPlayer.getBalance() > 3000) {
-            do {
+                gui.showMessage(selectedPlayer.getName() + dialog[8] + selectedPlayer.getBalance());
+                do {
                 answer_game = gui.getUserButtonPressed(dialog[9], dialog[10], dialog[11]); // Select language for the game dialog
 
                 if (answer_game.equals(dialog[11])) {
@@ -197,8 +198,6 @@ public class Main {
                 }
             } while (!answerGameOk);
         }}
-        //when loop ends, show message
-        gui.showMessage(selectedPlayer.getName() + dialog[8] + selectedPlayer.getBalance());
 
 
         while (game_running == true) ;
